@@ -16,6 +16,11 @@ else
 	CFLAGS = -O2
 endif
 
+# Support for cross-compilation
+ifdef CROSS_COMPILE
+	CC = $(CROSS_COMPILE)gcc
+endif
+
 # Add an executable target for the writer application
 writer: $(SOURCES)
 	$(CC) $(CFLAGS) -o writer $(SOURCES)
@@ -23,8 +28,3 @@ writer: $(SOURCES)
 # Add a clean target to remove the writer application and all .o files
 clean:
 	rm -f writer *.o
-
-# Support for cross-compilation
-ifdef CROSS_COMPILE
-	CC = $(CROSS_COMPILE)gcc
-endif
